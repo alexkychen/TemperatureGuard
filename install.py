@@ -42,13 +42,18 @@ for i in ["first","second","third","fourth"]:
 		ans2 = raw_input("Enter 1 after the probe is secured: ")
 		if ans2 == "1":
 			#Retrieve temperature probe SN
-			os.system("sudo modprobe w1-gpio && sudo modprobe w1-therm")
+			time.sleep(0.5)
+			os.system("sudo modprobe w1-gpio")
+			time.sleep(0.5)
+			os.system("sudo modprobe w1-therm")
+			time.sleep(0.5)
 			listfolder = os.listdir("devices")#Get list of folder in the devices folder
+			time.sleep(0.5)
 			break
 	SensorSN = listfolder[0]
 	SensorSN_list.append(SensorSN)
+	time.sleep(0.5)
 	print("Your " + i + " probe serial number is " + SensorSN)
-	time.sleep(2)
 
 #Export probe serial numbers to a text file
 os.chdir("..")#move up to bus folder
