@@ -15,9 +15,9 @@ sudo apt-get install python-smbus
 re = 'python -c "import RPi.GPIO as GPIO; print GPIO.RPI_REVISION"'
 if [ $re = "1"]
 then
-cp ConfigFiles/I2C_lib_0.py ./I2C_lib.py
+cp ConfigFiles/i2c_lib_0.py ./i2c_lib.py
 else
-cp ConfigFiles/I2C_lib_1.py ./I2C_lib.py
+cp ConfigFiles/i2c_lib_1.py ./i2c_lib.py
 fi
 echo "I2C LCD disply libraries were installed."
 

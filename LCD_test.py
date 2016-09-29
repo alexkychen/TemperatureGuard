@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 #I2C 16*2 LCD display test drive
 
-import I2C_driver
+import LCD_driver
 import time
 
-display = I2C_driver.lcd()
+display = LCD_driver.lcd()
 
 try:
 	display.lcd_display_string("Hello World", 1, 2) #write to 1st line and start at 3rd character
