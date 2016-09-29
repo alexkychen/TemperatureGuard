@@ -7,10 +7,13 @@ import time
 display = LCD_driver.lcd()
 
 try:
-	display.lcd_display_string("Hello World", 1, 2) #write to 1st line and start at 3rd character
-	display.lcd_display_string("Pi Temp Guard", 2, 1) #write to 2nd line and start at 2nd character
-	print("Some text should appear on LCD display. Press any key to clear the text on LCD")
+	print("Some text should appear on LCD display. Press ctrl+c to clear the text on LCD")
+	while True:
+		display.lcd_display_string("Hello World", 1) #write to 1st line
+		display.lcd_display_string("Pi Temp Guard", 2) #write to 2nd line
+		
 except KeyboardInterrupt:
 	display.lcd_clear()
-	exit(0)
+	print("Clearing up")
+
 
