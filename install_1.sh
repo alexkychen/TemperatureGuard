@@ -25,8 +25,5 @@ echo "I2C LCD disply libraries were installed."
 echo "Now test drive the LCD display..."
 sudo python LCD_test.py
 
-#Reboot the Pi
-echo "Press any key to reboot the Pi. After rebooting, please run './install_2.sh' from this folder."
-read -n1 -s
-sudo reboot
+
 
