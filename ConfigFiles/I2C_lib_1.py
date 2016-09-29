@@ -1,3 +1,4 @@
+#Cloned from the script provided by The Raspberry Pi Guy
 import smbus
 from time import *
 
