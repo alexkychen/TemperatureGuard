@@ -13,6 +13,7 @@ except:
 #Extract probe SN from ProbeSN.txt file
 SensorSN_list = []
 for line in openfile:
+	line = line.strip()
 	SensorSN_list.append(line)
 
 print(SensorSN_list)
