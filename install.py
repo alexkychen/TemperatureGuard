@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#A Python installer embedded shell script originated from The Raspberry Pi Guy
+#
 
 import os
 import RPi.GPIO as GPIO
@@ -38,40 +38,56 @@ os.chdir("sys/bus/w1")#change directory path to w1
 
 while True: #Plug one probe at a time until 4 probes are detected. If an additional probe is plugged, but the total number of probes is not correct, continue enter 1 until it is correct.
 	ans2 = raw_input("Please plug one probe to device and enter 1: ")
-		if ans2 == "1":
-			os.system("sudo modprobe w1-gpio")
-			os.system("sudo modprobe w1-therm")
-			deviceFolder = os.listdir("devices")
-			if length(deviceFolder) == 2:
-				sensorSN_1 = deviceFolder[0]
+	if ans2 == "1":
+		os.system("sudo modprobe w1-gpio")
+		os.system("sudo modprobe w1-therm")
+		deviceFolder = os.listdir("devices")
+		if len(deviceFolder) == 2:
+			sensorSN_1 = deviceFolder[0]
+			if sensorSN_1 in SensorSN_list:
+				print("Your first probe ("+sensorSN_1+") is detected! Number of probes is 1.")
+				continue
+			else:			
 				SensorSN_list.append(sensorSN_1)
 				print("Your first probe ("+sensorSN_1+") is detected! Number of probes is 1.")
 				continue
-			elif length(deviceFolder) == 3:
-				deviceFolder.remove(sensorSN_1)
-				sensorSN_2 = deviceFolder[0]
+		elif len(deviceFolder) == 3:
+			deviceFolder.remove(sensorSN_1)
+			sensorSN_2 = deviceFolder[0]
+			if sensorSN_2 in SensorSN_list:
+				print("Your second probe ("+sensorSN_2+") is detected! Number of probes is 2.")
+				continue
+			else:
 				SensorSN_list.append(sensorSN_2)
 				print("Your second probe ("+sensorSN_2+") is detected! Number of probes is 2.")
 				continue
-			elif length(deviceFolder) == 4:
-				deviceFolder.remove(sensorSN_1)
-				deviceFolder.remove(sensorSN_2)
-				sensorSN_3 = deviceFolder[0]
+		elif len(deviceFolder) == 4:
+			deviceFolder.remove(sensorSN_1)
+			deviceFolder.remove(sensorSN_2)
+			sensorSN_3 = deviceFolder[0]
+			if sensorSN_3 in SensorSN_list:
+				print("Your third probe ("+sensorSN_3+") is detected! Number of probes is 3.")
+				continue
+			else:
 				SensorSN_list.append(sensorSN_3)
 				print("Your third probe ("+sensorSN_3+") is detected! Number of probes is 3.")
 				continue
-			elif length(deviceFolder) == 5:
-				deviceFolder.remove(sensorSN_1)
-				deviceFolder.remove(sensorSN_2)
-				deviceFolder.remove(sensorSN_3)
-				sensorSN_4 = deviceFolder[0]
-				SensorSN_list.append(sensorSN_4)
+		elif len(deviceFolder) == 5:
+			deviceFolder.remove(sensorSN_1)
+			deviceFolder.remove(sensorSN_2)
+			deviceFolder.remove(sensorSN_3)
+			sensorSN_4 = deviceFolder[0]
+			if sensorSN_4 in SensorSN_list:
 				print("Your fourth probe ("+sensorSN_4+") is detected! Number of probes is 4.")
 				break
 			else:
-				continue
-		else: 
+				SensorSN_list.append(sensorSN_4)
+				print("Your fourth probe ("+sensorSN_4+") is detected! Number of probes is 4.")
+				break
+		else:
 			continue
+	else: 
+		continue
 print("Great! Four temperature probes were set up!")
 
 #Export probe serial numbers to a text file
