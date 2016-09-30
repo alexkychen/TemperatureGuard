@@ -37,8 +37,8 @@ os.chdir("..")
 os.chdir("sys/bus/w1")#change directory path to w1 
 
 while True: #Plug one probe at a time until 4 probes are detected. If an additional probe is plugged, but the total number of probes is not correct, continue enter 1 until it is correct.
-	ans2 = raw_input("Please plug one probe to device and enter 1: ")
-	if ans2 == "1":
+	ans2 = raw_input("Please plug one probe to device and enter Y: ")
+	if ans2.upper() == "Y":
 		os.system("sudo modprobe w1-gpio")
 		os.system("sudo modprobe w1-therm")
 		deviceFolder = os.listdir("devices")
