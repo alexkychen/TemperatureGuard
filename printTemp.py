@@ -48,7 +48,6 @@ try:
 	while True:
 		readTemp()
 		time.sleep(3)
-		display.lcd_clear()
 except KeyboardInterrupt:
 	display.lcd_clear()
 
