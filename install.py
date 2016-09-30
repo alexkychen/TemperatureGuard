@@ -1,5 +1,10 @@
 #!/usr/bin/env python
-#
+#A Pyhton installer for Pi Temperature Guard. 2016
+#Author: Kuan-Yu Chen. 
+#Last update: 2016.Sept.30
+#Description: Install I2C LCD library and driver created by Ryantech LTD, test drive the LCD display
+#and automatically set up 4 DS18B20 temperature sensors/probes. The serial number of temperature sensors will be saved in ProbeSN.txt.
+#The ProbeSN.txt will be used in printTemp.py  
 
 import os
 import RPi.GPIO as GPIO
@@ -33,9 +38,10 @@ print("LCD display cleared!")
 SensorSN_list = [] #Create an empty list to save sensors' serial number
 os.chdir("/")#move up working directory to the top
 os.chdir("sys/bus/w1")#change directory path to w1 
-
-while True: #Plug one probe at a time until 4 probes are detected. If an additional probe is plugged, but the total number of probes is not correct, continue enter 1 until it is correct.
-	ans2 = raw_input("Please plug one probe to device and enter Y: ")
+ #Connect one probe at a time until 4 probes are detected. 
+ #If the next probe is connected, but the total number of probes is not correct, continue enter y until it is correct.
+while True: 
+	ans2 = raw_input("Please connect one probe to device and enter Y: ")
 	if ans2.upper() == "Y":
 		os.system("sudo modprobe w1-gpio")
 		os.system("sudo modprobe w1-therm")

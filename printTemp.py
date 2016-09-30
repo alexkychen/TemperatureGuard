@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-#Read four temperature probes (DS18B20) and print temperature to LCD display
+#A Python script for reading and printing temperatures. 2016
+#Author: Kuan-Yu Chen
+#Last update: 2016.Sep.30
+#Description: Read four temperature probes (DS18B20) and print temperatures to LCD display
 
 import time
 import LCD_driver
