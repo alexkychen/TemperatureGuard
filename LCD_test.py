@@ -12,7 +12,7 @@ try:
 		display.lcd_display_string("Hello World", 1) #write to 1st line
 		display.lcd_display_string("Pi Temp Guard", 2) #write to 2nd line
 		
-except KeyboardInterrupt:
+except KeyboardInterrupt: #press ctrl+c to clear LCD display
 	display.lcd_clear()
 	print("Clearing up")
 

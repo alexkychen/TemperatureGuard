@@ -31,9 +31,7 @@ print("LCD display cleared!")
 
 #Setup DS18B20 temperature probes
 SensorSN_list = [] #Create an empty list to save sensors' serial number
-os.chdir("..")#move up working directory
-os.chdir("..")
-os.chdir("..")
+os.chdir("/")#move up working directory to the top
 os.chdir("sys/bus/w1")#change directory path to w1 
 
 while True: #Plug one probe at a time until 4 probes are detected. If an additional probe is plugged, but the total number of probes is not correct, continue enter 1 until it is correct.
@@ -91,16 +89,13 @@ while True: #Plug one probe at a time until 4 probes are detected. If an additio
 print("Great! Four temperature probes were set up!")
 
 #Export probe serial numbers to a text file
-os.chdir("..")#move up to bus folder
-os.chdir("..")#move up to sys folder
-os.chdir("..")#move up top 
+os.chdir("/")#move up working directory to the top
 os.chdir("home/pi/TemperatureGuard")
 with open("ProbeSN.txt","w") as probeSN:
 	for sn in SensorSN_list:
 		probeSN.write(sn + "\n")
 print("A probe serial numer file (ProbeSN.txt) was created.")
-
-
+print("After rebooting, try to run 'python printTemp.py' from this folder")
 
 
 
