@@ -1,3 +1,3 @@
-# TemperatureGuard
+# Pi Temperature Guard
 
 ##Description
