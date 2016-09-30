@@ -36,24 +36,43 @@ os.chdir("..")
 os.chdir("..")
 os.chdir("sys/bus/w1")#change directory path to w1 
 
-for i in ["first","second","third","fourth"]:
-	print("Now please unplug any probe and only plug your " + i + " temperature probe to the device.")
-	while True:
-		ans2 = raw_input("Enter 1 after the probe is secured: ")
+while True: #Plug one probe at a time until 4 probes are detected. If an additional probe is plugged, but the total number of probes is not correct, continue enter 1 until it is correct.
+	ans2 = raw_input("Please plug one probe to device and enter 1: ")
 		if ans2 == "1":
-			#Retrieve temperature probe SN
-			time.sleep(0.5)
 			os.system("sudo modprobe w1-gpio")
-			time.sleep(0.5)
 			os.system("sudo modprobe w1-therm")
-			time.sleep(0.5)
-			listfolder = os.listdir("devices")#Get list of folder in the devices folder
-			time.sleep(0.5)
-			break
-	SensorSN = listfolder[0]
-	SensorSN_list.append(SensorSN)
-	time.sleep(0.5)
-	print("Your " + i + " probe serial number is " + SensorSN)
+			deviceFolder = os.listdir("devices")
+			if length(deviceFolder) == 2:
+				sensorSN_1 = deviceFolder[0]
+				SensorSN_list.append(sensorSN_1)
+				print("Your first probe ("+sensorSN_1+") is detected! Number of probes is 1.")
+				continue
+			elif length(deviceFolder) == 3:
+				deviceFolder.remove(sensorSN_1)
+				sensorSN_2 = deviceFolder[0]
+				SensorSN_list.append(sensorSN_2)
+				print("Your second probe ("+sensorSN_2+") is detected! Number of probes is 2.")
+				continue
+			elif length(deviceFolder) == 4:
+				deviceFolder.remove(sensorSN_1)
+				deviceFolder.remove(sensorSN_2)
+				sensorSN_3 = deviceFolder[0]
+				SensorSN_list.append(sensorSN_3)
+				print("Your third probe ("+sensorSN_3+") is detected! Number of probes is 3.")
+				continue
+			elif length(deviceFolder) == 5:
+				deviceFolder.remove(sensorSN_1)
+				deviceFolder.remove(sensorSN_2)
+				deviceFolder.remove(sensorSN_3)
+				sensorSN_4 = deviceFolder[0]
+				SensorSN_list.append(sensorSN_4)
+				print("Your fourth probe ("+sensorSN_4+") is detected! Number of probes is 4.")
+				break
+			else:
+				continue
+		else: 
+			continue
+print("Great! Four temperature probes were set up!")
 
 #Export probe serial numbers to a text file
 os.chdir("..")#move up to bus folder
@@ -63,7 +82,7 @@ os.chdir("home/pi/TemperatureGuard")
 with open("ProbeSN.txt","w") as probeSN:
 	for sn in SensorSN_list:
 		probeSN.write(sn + "\n")
-
+print("A probe serial numer file (ProbeSN.txt) was created.")
 
 
 
