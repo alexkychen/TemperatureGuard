@@ -41,6 +41,7 @@ def readTemp():
 		TempData.append(temp_num)
 	row1 = "#1:"+str(TempData[0])+" #2:"+str(TempData[1])
 	row2 = "#3:"+str(TempData[2])+" #4:"+str(TempData[3])
+	display.lcd_clear()
 	display.lcd_display_string(row1,1)
 	display.lcd_display_string(row2,2)
 
@@ -50,7 +51,7 @@ display.lcd_clear()
 try:
 	while True:
 		readTemp()
-		time.sleep(3)
+		time.sleep(5)
 except KeyboardInterrupt:
 	display.lcd_clear()
 
