@@ -31,14 +31,25 @@ def readTemp():
 	base_dir = '/sys/bus/w1/devices/'
 	for sensorSN in SensorSN_list:
 		sensor_file = base_dir + sensorSN + '/w1_slave'
-		sensor_open = open(sensor_file, 'r')
+		try:
+			sensor_open = open(sensor_file, 'r')
+		except:
+			temp_num = " NA"
+			TempData.append(temp_num)
+			continue	
 		sensor_read = sensor_open.read()
 		sensor_open.close()
-		#convert temp reading to C degree
-		temp_string = sensor_read.split('\n')[1].split(' ')[9]
-		temp_num = float(temp_string[2:])/1000
-		temp_num = round(temp_num,1)
-		TempData.append(temp_num)
+		#check if probe is working
+		check_probe = sensor_read.split('\n')[0].split(' ')[-1] #get the last element (yes/no)
+		if check_probe == "NO":
+			temp_num = " NA"
+			TempData.append(temp_num)
+		else:
+			#convert temp reading to C degree
+			temp_string = sensor_read.split('\n')[1].split(' ')[9]
+			temp_num = float(temp_string[2:])/1000
+			temp_num = round(temp_num,1)
+			TempData.append(temp_num)
 	row1 = "#1:"+str(TempData[0])+" #2:"+str(TempData[1])
 	row2 = "#3:"+str(TempData[2])+" #4:"+str(TempData[3])
 	display.lcd_clear()
