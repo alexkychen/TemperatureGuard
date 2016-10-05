@@ -38,6 +38,16 @@ print("LCD display cleared!")
 SensorSN_list = [] #Create an empty list to save sensors' serial number
 os.chdir("/")#move up working directory to the top
 os.chdir("sys/bus/w1")#change directory path to w1 
+#Enter number of probes to be installed
+while True:
+	noProbes = raw_input("How many probes would you like to install? (up to 4): ")
+	noProbes = int(noProbes)
+	if noProbes >=1 and noProbes <= 4:
+		break
+	else: 
+		print("Please enter 1, 2, 3 or 4")
+		continue
+
  #Connect one probe at a time until 4 probes are detected. 
  #If the next probe is connected, but the total number of probes is not correct, continue enter y until it is correct.
 while True: 
@@ -50,32 +60,44 @@ while True:
 			sensorSN_1 = deviceFolder[0]
 			if sensorSN_1 in SensorSN_list:
 				print("Your first probe ("+sensorSN_1+") is detected! Number of probes is 1.")
-				continue
+				if noProbes == 1:
+					break
+				else: continue
 			else:			
 				SensorSN_list.append(sensorSN_1)
 				print("Your first probe ("+sensorSN_1+") is detected! Number of probes is 1.")
-				continue
+				if noProbes == 1:
+					break
+				else: continue
 		elif len(deviceFolder) == 3:
 			deviceFolder.remove(sensorSN_1)
 			sensorSN_2 = deviceFolder[0]
 			if sensorSN_2 in SensorSN_list:
 				print("Your second probe ("+sensorSN_2+") is detected! Number of probes is 2.")
-				continue
+				if noProbes == 2:
+					break
+				else: continue
 			else:
 				SensorSN_list.append(sensorSN_2)
 				print("Your second probe ("+sensorSN_2+") is detected! Number of probes is 2.")
-				continue
+				if noProbes == 2:
+					break
+				else: continue
 		elif len(deviceFolder) == 4:
 			deviceFolder.remove(sensorSN_1)
 			deviceFolder.remove(sensorSN_2)
 			sensorSN_3 = deviceFolder[0]
 			if sensorSN_3 in SensorSN_list:
 				print("Your third probe ("+sensorSN_3+") is detected! Number of probes is 3.")
-				continue
+				if noProbes == 3:
+					break
+				else: continue
 			else:
 				SensorSN_list.append(sensorSN_3)
 				print("Your third probe ("+sensorSN_3+") is detected! Number of probes is 3.")
-				continue
+				if noProbes == 3:
+					break
+				else: continue
 		elif len(deviceFolder) == 5:
 			deviceFolder.remove(sensorSN_1)
 			deviceFolder.remove(sensorSN_2)
@@ -92,7 +114,11 @@ while True:
 			continue
 	else: 
 		continue
-print("Great! Four temperature probes were set up!")
+#Print out some messages
+if noProbes == 1:
+	print("Great! The temperature probe was set up!")
+else:
+	print("Great! " + str(noProbes) + " temperature probes were set up!")
 
 #Export probe serial numbers to a text file
 os.chdir("/")#move up working directory to the top
@@ -100,8 +126,14 @@ os.chdir("home/pi/TemperatureGuard")
 with open("ProbeSN.txt","w") as probeSN:
 	for sn in SensorSN_list:
 		probeSN.write(sn + "\n")
-print("A probe serial numer file (ProbeSN.txt) was created.")
-print("After rebooting, try to run 'python printTemp.py' from this folder")
+print("############################################")
+print("# Congrats! Probes successfully installed! #")
+print("# ######################################## #")
+print("# A probe serial number file (ProbeSN.txt) #")
+print("# was created.                             #")
+print("# Next, rebooting the Pi and try to run    #")
+print("# 'python printTemp.py' from this folder.  #")
+print("############################################")
 
 
 
