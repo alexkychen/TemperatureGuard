@@ -34,7 +34,7 @@ def readTemp():
 		try:
 			sensor_open = open(sensor_file, 'r')
 		except:
-			temp_num = " NA"
+			temp_num = " NA "
 			TempData.append(temp_num)
 			continue	
 		sensor_read = sensor_open.read()
@@ -42,7 +42,7 @@ def readTemp():
 		#check if probe is working
 		check_probe = sensor_read.split('\n')[0].split(' ')[-1] #get the last element (yes/no)
 		if check_probe == "NO":
-			temp_num = " NA"
+			temp_num = " NA "
 			TempData.append(temp_num)
 		else:
 			#convert temp reading to C degree
