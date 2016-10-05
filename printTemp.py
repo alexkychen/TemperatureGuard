@@ -50,8 +50,8 @@ def readTemp():
 			temp_num = float(temp_string[2:])/1000
 			temp_num = round(temp_num,1)
 			TempData.append(temp_num)
-	row1 = "#1:"+str(TempData[0])+" #2:"+str(TempData[1])
-	row2 = "#3:"+str(TempData[2])+" #4:"+str(TempData[3])
+	row1 = "#1:"+str(TempData[0])[0:4]+" #2:"+str(TempData[1])[0:4]
+	row2 = "#3:"+str(TempData[2])[0:4]+" #4:"+str(TempData[3])[0:4]
 	display.lcd_clear()
 	display.lcd_display_string(row1,1)
 	display.lcd_display_string(row2,2)
